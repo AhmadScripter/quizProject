@@ -34,6 +34,21 @@ const getQuiz = async (req, res) => {
     }
 };
 
+// Get Quiz by id
+const getQuizByID= async (req,res) =>{
+    const {id} = req.params.id;
+    try {
+        const quiz = await Quiz.findById(id);
+        if (!quiz) {
+            return res.status(404).json({ message: 'Question not found' });
+        }
+        res.status(200).json(quiz);
+    } catch (err) {
+        console.error('Error fetching question:', err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+
 // Update a quiz by ID
 const updateQuiz = async (req, res) => {
     const { id } = req.params;
@@ -112,4 +127,4 @@ const submitQuiz = async (req, res) => {
     }
 };
 
-module.exports = { addQuiz, getQuiz, updateQuiz, deleteQuiz, submitQuiz };
+module.exports = { addQuiz, getQuiz, getQuizByID, updateQuiz, deleteQuiz, submitQuiz };

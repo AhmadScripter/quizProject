@@ -1,12 +1,14 @@
 const express = require('express');
-const { addQuiz, getQuiz, updateQuiz, deleteQuiz, submitQuiz } = require('../controller/quizController');
+const { addQuiz, getQuiz, updateQuiz, deleteQuiz, submitQuiz, getQuizByID } = require('../controller/quizController');
+const adminAuth = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
 router.get('/', getQuiz);
-router.post('/add', addQuiz);
-router.put('/update/:id', updateQuiz);
-router.delete('/delete/:id', deleteQuiz);
+router.get('/:id', adminAuth, getQuizByID)
+router.post('/add', adminAuth, addQuiz);
+router.put('/update/:id', adminAuth, updateQuiz);
+router.delete('/delete/:id', adminAuth, deleteQuiz);
 
 router.post('/submit', submitQuiz);
 

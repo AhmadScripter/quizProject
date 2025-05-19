@@ -1,13 +1,14 @@
 const express = require('express');
-const { addCandidate, getCandidates, updateCandidate, deleteCandidate, loginCandidate } = require('../controller/candidateController');
+const { getCandidates, updateCandidate, loginCandidate, registerCandidate, removeCandidate, getCandidateById } = require('../controller/candidateController');
 const adminAuth = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
 router.get('/', getCandidates);
-router.post('/add', adminAuth, addCandidate);
+router.get('/:id', adminAuth, getCandidateById);
+router.post('/register', adminAuth, registerCandidate);
 router.put('/update/:id', adminAuth, updateCandidate);
-router.delete('/delete/:id', adminAuth, deleteCandidate);
+router.delete('/remove/:id', adminAuth, removeCandidate);
 
 router.post('/login', loginCandidate);
 

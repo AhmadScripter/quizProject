@@ -1,7 +1,7 @@
 const Candidate = require('../models/candidate');
 
 // Add a new candidate
-const addCandidate = async (req, res) => {
+const registerCandidate = async (req, res) => {
     const { cnic, name, batch, reg, password } = req.body;
 
     if (!cnic || !name || !batch || !reg || !password) {
@@ -30,6 +30,22 @@ const getCandidates = async (req, res) => {
         res.status(200).json(candidates);
     } catch (err) {
         console.error('Error fetching candidates:', err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// Get a single candidate by ID
+const getCandidateById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const candidate = await Candidate.findById(id);
+        if (!candidate) {
+            return res.status(404).json({ message: 'Candidate not found' });
+        }
+        res.status(200).json(candidate);
+    } catch (err) {
+        console.error('Error fetching candidate:', err.message);
         res.status(500).json({ message: 'Server error' });
     }
 };
@@ -70,7 +86,7 @@ const updateCandidate = async (req, res) => {
 };
 
 // Delete candidate by ID
-const deleteCandidate = async (req, res) => {
+const removeCandidate = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -106,4 +122,4 @@ const loginCandidate = async (req, res) => {
     }
 };
 
-module.exports = { addCandidate, getCandidates, updateCandidate, deleteCandidate, loginCandidate };
+module.exports = { registerCandidate, getCandidates, getCandidateById, updateCandidate, removeCandidate, loginCandidate };

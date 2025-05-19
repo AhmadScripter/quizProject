@@ -5,10 +5,8 @@ const bcrypt = require("bcryptjs");
 const adminAuthRoutes = require('./routes/adminAuthRoutes');
 const quizRoutes = require('./routes/quizRoutes');
 const candidateRoutes = require('./routes/candidateRoutes');
-
 const connectDB = require("./config/db");
 const Admin = require('./models/admin');
-
 const app = express();
 
 connectDB().then(() => {
