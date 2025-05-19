@@ -27,7 +27,8 @@ export class LoginComponent {
       this.candidateService.loginCandidate(credentials).subscribe({
         next: (res) => {
           localStorage.setItem('candidateToken', res.token);
-          // this.showInstructions();
+          localStorage.setItem('reg', res.reg);
+          this.showInstructions();
           this.router.navigate(['/quiz']);
         },
         error: (err) => {

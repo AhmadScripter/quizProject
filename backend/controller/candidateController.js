@@ -119,12 +119,11 @@ const loginCandidate = async (req, res) => {
       { expiresIn: '2h' }
     );
 
-    console.log("Generated candidateToken:", candidateToken);
-
     res.status(200).json({
       message: "Login successful",
       candidate,
-      token: candidateToken
+      token: candidateToken,
+      reg: candidate.reg
     });
 
   } catch (err) {

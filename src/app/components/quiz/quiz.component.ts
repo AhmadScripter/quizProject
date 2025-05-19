@@ -122,10 +122,11 @@ export class QuizComponent implements OnInit, OnDestroy{
     const correctAnswers = this.questions.filter(q => q.selectedIndex === q.correctIndex).length;
 
     const payload = {
-      candidateToken: this.candidateToken,
+      // candidateToken: this.candidateToken,
       totalQuestions: this.questions.length,
       attempted: attemptedQuestions,
       correct: correctAnswers,
+      reg: localStorage.getItem('reg'),
       answers: this.questions.map(q => ({
         questionId: q._id,
         selectedIndex: q.selectedIndex
