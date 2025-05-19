@@ -1,0 +1,59 @@
+<!-- <h2>Quiz Questions</h2>
+<button routerLink="/admin-dashboard/quiz-form">Add New Question</button>
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Options</th>
+      <th>Answer</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let q of quizzes">
+      <td>{{ q.question }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let opt of q.options">{{ opt }}</li>
+        </ul>
+      </td>
+      <td>{{ q.answer }}</td>
+      <td>
+        <button [routerLink]="['/admin-dashboard/quiz-form', q._id]">Edit</button>
+        <button (click)="deleteQuiz(q._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+<div class="quiz-list-container">
+  <h2>Quiz Questions</h2>
+  <button routerLink="/admin-dashboard/quiz-form" class="add-btn">Add New Question</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Options</th>
+        <th>Answer</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let q of quizzes">
+        <td>{{ q.question }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let opt of q.options">{{ opt }}</li>
+          </ul>
+        </td>
+        <td>{{ q.answer }}</td>
+        <td>
+          <button [routerLink]="['/admin-dashboard/quiz-form', q._id]">Edit</button>
+          <button (click)="deleteQuiz(q._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

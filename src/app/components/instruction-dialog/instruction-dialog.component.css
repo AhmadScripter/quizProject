@@ -1,0 +1,12 @@
+.mat-dialog-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mat-dialog-actions {
+    justify-content: center;
+}
+.dialog-content {
+    padding: 20px;
+}

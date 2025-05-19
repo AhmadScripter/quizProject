@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="sub-container">
+        <h2>Welcome to the Quiz</h2>
+        <p>Please input your Registeration Id and password to start Quiz</p>
+
+        <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="userIdInput" class="form-label">Registeration Id</label>
+              <input type="text" class="form-control" id="userIdInput" [(ngModel)]="reg" name="reg" placeholder="2021-ag-6005" required>
+            </div>
+            <div class="mb-3">
+              <label for="passwordInput" class="form-label">Password</label>
+              <input type="password" class="form-control" id="passwordInput" [(ngModel)]="password" name="password" required>
+            </div>
+            <button mat-raised-button class="btn btn-primary" type="submit">Submit</button>
+          </form>
+    </div>
+</div>

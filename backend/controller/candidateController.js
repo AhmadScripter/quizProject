@@ -1,4 +1,5 @@
 const Candidate = require('../models/candidate');
+const jwt = require('jsonwebtoken');
 
 // Add a new candidate
 const registerCandidate = async (req, res) => {
@@ -101,25 +102,34 @@ const removeCandidate = async (req, res) => {
     }
 };
 
+// candidate login
 const loginCandidate = async (req, res) => {
-    const { reg, password } = req.body;
+  const { reg, password } = req.body;
 
-    try {
-        const candidate = await Candidate.findOne({ reg, password });
+  try {
+    const candidate = await Candidate.findOne({ reg, password });
 
-        if (!candidate) {
-            return res.status(404).json({ message: "Invalid registration number or password" });
-        }
-
-        res.status(200).json({
-            message: "Login successful",
-            candidate
-        });
-
-    } catch (err) {
-        console.error("Login error:", err);
-        res.status(500).json({ message: "Server error" });
+    if (!candidate) {
+      return res.status(404).json({ message: "Invalid registration number or password" });
     }
+
+    const candidateToken = jwt.sign(
+      { id: candidate._id, reg: candidate.reg },
+      process.env.JWT_SECRET,
+      { expiresIn: '2h' }
+    );
+
+    console.log("Generated candidateToken:", candidateToken);
+
+    res.status(200).json({
+      message: "Login successful",
+      candidate,
+      token: candidateToken
+    });
+
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 module.exports = { registerCandidate, getCandidates, getCandidateById, updateCandidate, removeCandidate, loginCandidate };

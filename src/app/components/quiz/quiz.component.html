@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <div class="container">
+        <div class="row justify-content-center flex-column align-items-center">
+            <div class="col-md-8 content">
+                <header class="bg">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <img src="assets/quiz-icon.png" alt class="logo">
+                        </div>
+                        <div class="col text-center">
+                            <h2 class="heading">Quiz Web</h2>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row align-items-center text-center">
+                        <div class="col">
+                            <h3>Question <span>{{currentQuestionIndex + 1}}</span> of <span>{{questions.length}}</span></h3>
+                        </div>
+                        <div class="col">
+                            <p><span [ngClass]="{'text-danger' : isTimeRunningOut()}">{{formatTime(timer)}}</span> min <img
+                                    src="assets/timer-icon.png" class="timer-icon" alt></p>
+                        </div>
+                    </div>
+                    <hr>
+                </header>
+
+                <div class="question bg">
+                    <h4>{{currentQuestion.question}}</h4>
+                </div>
+                <div class="answers">
+                    <div class="option bg" *ngFor="let option of currentQuestion.options; let i = index"
+                        [ngClass]="getOptionClass(i)" (click)="selectOption(i)" [class.disabled]="currentQuestion.answered">
+                        <span>{{option}}</span>
+                    </div>
+                </div>
+                <div class="bottom-row row d-flex align-items-center">
+                    <div class="col d-flex justify-content-start">
+                        <i class="fa-solid fa-arrow-left" (click)="previousQuestion()"></i>
+                    </div>
+                    <div class="col d-flex justify-content-center align-items-center gap-2">
+                        <i class="fa-solid fa-recycle"></i>
+                        <span>Revisit Questions</span>
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <i class="fa-solid fa-arrow-right" (click)="nextQuestion()"></i>
+                    </div>
+                </div>
+
+                <footer>
+                    <div *ngFor="let question of questions; let i = index" [ngClass]="{'current': i === currentQuestionIndex, 'answered': question.selectedIndex !== undefined}">
+                        {{i + 1}}
+                    </div>
+                </footer>
+                <button class="btn btn-primary" (click)="submitQuiz()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

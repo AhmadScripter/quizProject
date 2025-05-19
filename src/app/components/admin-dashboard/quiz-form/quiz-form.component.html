@@ -1,0 +1,25 @@
+<h2>{{ id ? 'Edit Question' : 'Add New Question' }}</h2>
+
+<form (ngSubmit)="saveQuiz()" class="quiz-form">
+  <label>Question:</label>
+  <input [(ngModel)]="quiz.question" name="question" required />
+
+  <div *ngFor="let option of quiz.options; let i = index; trackBy: trackByIndex">
+    <label>Option {{ i + 1 }}:</label>
+    <input [(ngModel)]="quiz.options[i]" [name]="'option' + i" required autocomplete="off" />
+  </div>
+  
+  
+  <!-- <div *ngFor="let option of quiz.options; let i = index">
+    <label>Option {{ i + 1 }}:</label>
+    <input [(ngModel)]="quiz.options[i]" name="option{{ i }}" required />
+  </div> -->
+
+  <label>Correct Answer:</label>
+  <input [(ngModel)]="quiz.answer" name="answer" required />
+
+  <div class="form-actions">
+    <button type="submit">{{ id ? 'Update' : 'Add' }}</button>
+    <button type="button" routerLink="/admin-dashboard/quiz-list">Cancel</button>
+  </div>
+</form>

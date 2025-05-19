@@ -1,0 +1,35 @@
+<h2>Candidate List</h2>
+
+<button class="add-btn" routerLink="/admin-dashboard/candidate-form">
+  Add New Candidate
+</button>
+
+<table class="candidate-table">
+  <thead>
+    <tr>
+      <th>CNIC</th>
+      <th>Name</th>
+      <th>Batch</th>
+      <th>Reg</th>
+      <th>Password</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of candidates">
+      <td>{{ c.cnic }}</td>
+      <td>{{ c.name }}</td>
+      <td>{{ c.batch }}</td>
+      <td>{{ c.reg }}</td>
+      <td>{{c.password}}</td>
+      <td>
+        <button class="edit-btn" [routerLink]="['/admin-dashboard/candidate-form', c._id]">
+          Edit
+        </button>
+        <button class="delete-btn" (click)="deleteCandidate(c._id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

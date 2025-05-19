@@ -1,0 +1,23 @@
+<h2>{{ id ? 'Edit Candidate' : 'Add Candidate' }}</h2>
+
+<form *ngIf="candidate" (ngSubmit)="saveCandidate()" class="candidate-form">
+  <label>CNIC:</label>
+  <input [(ngModel)]="candidate.cnic" name="cnic" required>
+
+  <label>Name:</label>
+  <input [(ngModel)]="candidate.name" name="name" required>
+
+  <label>Batch:</label>
+  <input [(ngModel)]="candidate.batch" name="batch" required>
+
+  <label>Registration Number:</label>
+  <input [(ngModel)]="candidate.reg" name="reg" required>
+
+  <label>Password</label>
+  <input [(ngModel)]="candidate.password" name="password" required>
+
+  <div class="form-actions">
+    <button type="submit">{{ id ? 'Update' : 'Add' }}</button>
+    <button type="button" routerLink="/admin-dashboard/candidate-list">Cancel</button>
+  </div>
+</form>
