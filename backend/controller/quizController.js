@@ -35,8 +35,8 @@ const getQuiz = async (req, res) => {
 };
 
 // Get Quiz by id
-const getQuizByID= async (req,res) =>{
-    const {id} = req.params.id;
+const getQuizByID = async (req, res) => {
+    const { id } = req.params.id;
     try {
         const quiz = await Quiz.findById(id);
         if (!quiz) {
@@ -110,8 +110,14 @@ const submitQuiz = async (req, res) => {
         const quizzes = await Quiz.find();
         let score = 0;
 
-        quizzes.forEach((quiz, index) => {
-            if (answers[index] && answers[index] === quiz.answer) {
+        quizzes.forEach((quiz) => {
+            const submitted = answers.find(a => a.quizId === String(quiz._id));
+
+            if (
+                submitted &&
+                submitted.answer !== null &&
+                submitted.answer === quiz.answer
+            ) {
                 score++;
             }
         });

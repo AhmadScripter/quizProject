@@ -118,23 +118,19 @@ export class QuizComponent implements OnInit, OnDestroy{
   }
 
   submitQuiz(): void {
-    const attemptedQuestions = this.questions.filter(q => q.answered).length;
-    const correctAnswers = this.questions.filter(q => q.selectedIndex === q.correctIndex).length;
-
+    const attemptedQuestions = this.questions.filter(q => q.selectedIndex !== undefined).length;
+  
     const payload = {
-      // candidateToken: this.candidateToken,
-      totalQuestions: this.questions.length,
-      attempted: attemptedQuestions,
-      correct: correctAnswers,
       reg: localStorage.getItem('reg'),
       answers: this.questions.map(q => ({
-        questionId: q._id,
-        selectedIndex: q.selectedIndex
+        quizId: q._id,
+        answer: q.selectedIndex !== undefined ? q.options[q.selectedIndex] : null
       }))
     };
-
+  
     this.quizService.submitQuiz(payload).subscribe({
-      next: () => {
+      next: (res) => {
+        const correctAnswers = res.score;
         this.router.navigate(['/result'], {
           queryParams: {
             total: this.questions.length,

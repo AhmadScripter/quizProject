@@ -18,7 +18,8 @@ export const routes: Routes = [
   { path: 'quiz', component: QuizComponent, canActivate: [candidateAuthGuard] },
   { path: 'result', component: ResultComponent },
   
-  { path: 'admin-login', component: AdminLoginComponent },
+  // { path: 'admin-login', component: AdminLoginComponent },
+  { path: 'admin/login', component: AdminLoginComponent },
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
