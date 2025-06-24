@@ -20,6 +20,7 @@ export class CandidateFormComponent implements OnInit{
   };
 
   id: string | null = null;
+  error: string= '';
 
   constructor(
     private candidateService: CandidateService,
@@ -31,22 +32,41 @@ export class CandidateFormComponent implements OnInit{
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       this.candidateService.getCandidate(this.id).subscribe(data => {
-        console.log('Fetched candidate:', data);  // ✅ Debug
+        console.log('Fetched candidate:', data);
         this.candidate = data;
       });
     }
   }
   
   saveCandidate() {
-    if(this.id) {
-      this.candidateService.updateCandidate(this.id, this.candidate).subscribe(() => {
-        this.router.navigate(['/admin-dashboard/candidate-list']);
+    if (this.id) {
+      this.candidateService.updateCandidate(this.id, this.candidate).subscribe({
+        next: () => {
+          this.router.navigate(['/admin-dashboard/candidate-list']);
+        },
+        error: (err) => {
+          this.error = err.error?.message || 'Failed to update candidate.';
+        }
       });
     } else {
-      this.candidateService.registerCandidate(this.candidate).subscribe(() => {
-        this.router.navigate(['/admin-dashboard/candidate-list']);
+      this.candidateService.registerCandidate(this.candidate).subscribe({
+        next: () => {
+          this.router.navigate(['/admin-dashboard/candidate-list']);
+        },
+        error: (err) => {
+          this.error = err.error?.message || 'Failed to register candidate.';
+        }
       });
     }
+    // if(this.id) {
+    //   this.candidateService.updateCandidate(this.id, this.candidate).subscribe(() => {
+    //     this.router.navigate(['/admin-dashboard/candidate-list']);
+    //   });
+    // } else {
+    //   this.candidateService.registerCandidate(this.candidate).subscribe(() => {
+    //     this.router.navigate(['/admin-dashboard/candidate-list']);
+    //   });
+    // }
   }
 
 }

@@ -11,6 +11,7 @@ import { CandidateListComponent } from './components/admin-dashboard/candidate-l
 import { CandidateFormComponent } from './components/admin-dashboard/candidate-form/candidate-form.component';
 import { QuizListComponent } from './components/admin-dashboard/quiz-list/quiz-list.component';
 import { QuizFormComponent } from './components/admin-dashboard/quiz-form/quiz-form.component';
+import { ResultsComponent } from './components/admin-dashboard/results/results.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomePageComponent },
@@ -18,7 +19,6 @@ export const routes: Routes = [
   { path: 'quiz', component: QuizComponent, canActivate: [candidateAuthGuard] },
   { path: 'result', component: ResultComponent },
   
-  // { path: 'admin-login', component: AdminLoginComponent },
   { path: 'admin/login', component: AdminLoginComponent },
   {
     path: 'admin-dashboard',
@@ -31,6 +31,7 @@ export const routes: Routes = [
       { path: 'quiz-list', component: QuizListComponent },
       { path: 'quiz-form', component: QuizFormComponent },
       { path: 'quiz-form/:id', component: QuizFormComponent },
+      {path: 'results', component: ResultsComponent},
       { path: '', redirectTo: 'candidate-list', pathMatch: 'full' }
     ]
   }

@@ -6,7 +6,7 @@ const candidateSchema = new mongoose.Schema({
     batch: { type: String, required: true },
     reg: { type: String, required: true, unique: true },
     password: {type: String, required: true},
-    score: { type: Number, default: 0 }
+    score: { type: Number, default: null }
 }, {
     timestamps: true
 });

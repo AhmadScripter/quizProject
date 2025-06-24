@@ -1,6 +1,11 @@
 <h2>{{ id ? 'Edit Candidate' : 'Add Candidate' }}</h2>
 
 <form *ngIf="candidate" (ngSubmit)="saveCandidate()" class="candidate-form">
+  
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+  
   <label>CNIC:</label>
   <input [(ngModel)]="candidate.cnic" name="cnic" required>
 

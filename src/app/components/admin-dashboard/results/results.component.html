@@ -1,0 +1,30 @@
+<h2>Candidate List</h2>
+
+<table class="candidate-table">
+    <thead>
+        <tr>
+            <th>CNIC</th>
+            <th>Name</th>
+            <th>Batch</th>
+            <th>Reg</th>
+            <th>Status</th>
+            <th>Marks</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let c of candidates">
+            <td>{{ c.cnic }}</td>
+            <td>{{ c.name }}</td>
+            <td>{{ c.batch }}</td>
+            <td>{{ c.reg }}</td>
+            <td>
+                <h6 class="status-badge"
+                    [ngClass]="c.score !== null && c.score !== undefined ? 'attempted' : 'not-attempted'">
+                    {{ c.score !== null && c.score !== undefined ? 'Attempted' : 'Not Attempted' }}
+                </h6>
+            </td>
+            <td>{{ c.score }}</td>
+        </tr>
+    </tbody>
+</table>
