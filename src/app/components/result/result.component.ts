@@ -17,6 +17,12 @@ export class ResultComponent {
 
   constructor(private route: ActivatedRoute) { }
   ngOnInit(): void {
+    // Prevent back button
+    history.pushState(null, '', location.href);
+    window.onpopstate = () => {
+      history.pushState(null, '', location.href);
+    };
+    
     this.route.queryParams.subscribe(params => {
       this.totalQuestions = +params['total'];
       this.attemptedQuestions = +params['attempted'];

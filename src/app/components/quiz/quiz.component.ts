@@ -20,8 +20,8 @@ interface QuizQuestion {
   styleUrl: './quiz.component.css'
 })
 
-export class QuizComponent implements OnInit, OnDestroy{
-  
+export class QuizComponent implements OnInit, OnDestroy {
+
   candidateToken: string | null = '';
   questions: QuizQuestion[] = [];
   currentQuestionIndex: number = 0;
@@ -29,7 +29,7 @@ export class QuizComponent implements OnInit, OnDestroy{
   timer: number = 0;
   timerInterval: any;
 
-  constructor(private router: Router, private quizService: QuizService){}
+  constructor(private router: Router, private quizService: QuizService) { }
 
   ngOnInit(): void {
     this.candidateToken = localStorage.getItem('candidateToken');
@@ -54,7 +54,7 @@ export class QuizComponent implements OnInit, OnDestroy{
       error: (err) => {
         console.error('Failed to load questions', err);
       }
-    });    
+    });
   }
 
   startTimer(): void {
@@ -118,8 +118,11 @@ export class QuizComponent implements OnInit, OnDestroy{
   }
 
   submitQuiz(): void {
+    const confirmSubmit = window.confirm("Are you sure you want to submit your test?");
+    if (!confirmSubmit) return;
+
     const attemptedQuestions = this.questions.filter(q => q.selectedIndex !== undefined).length;
-  
+
     const payload = {
       reg: localStorage.getItem('reg'),
       answers: this.questions.map(q => ({
@@ -127,7 +130,7 @@ export class QuizComponent implements OnInit, OnDestroy{
         answer: q.selectedIndex !== undefined ? q.options[q.selectedIndex] : null
       }))
     };
-  
+
     this.quizService.submitQuiz(payload).subscribe({
       next: (res) => {
         const correctAnswers = res.score;

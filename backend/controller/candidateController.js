@@ -113,6 +113,11 @@ const loginCandidate = async (req, res) => {
       return res.status(404).json({ message: "Invalid registration number or password" });
     }
 
+    if (candidate.score !== null && candidate.score !== undefined) {
+        return res.status(403).json({ message: "You have already attempted the test. You cannot log in again." });
+      }
+  
+
     const candidateToken = jwt.sign(
       { id: candidate._id, reg: candidate.reg },
       process.env.JWT_SECRET,
