@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { QuizService } from '../../services/quiz.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
@@ -16,6 +15,6 @@ export class AdminDashboardComponent {
 
   logout(){
     localStorage.removeItem('adminToken')
-    this.router.navigate(['/admin-login']);
+    this.router.navigate(['/admin/login']);
   }
 }
